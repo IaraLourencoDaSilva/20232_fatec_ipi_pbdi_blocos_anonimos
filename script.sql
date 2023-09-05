@@ -1,27 +1,59 @@
-DO 
+DO
 $$
-DECLARE 
-	n1 INT := 5;
-	n2 INT := 2;
-	n3 NUMERIC (5, 2) := 5;
-	n4 INT :=  -5;
+DECLARE
+	n1 NUMERIC(5,2);
+	n2 INT;
+	limite_inf INT := 5;
+	limite_sup INT := 17;
 BEGIN
-	-- divisão inteira 
-	RAISE NOTICE '% / % = %', n1, n2, n1/n2;
-	--divisão real 
-	RAISE NOTICE '% / % = %', n3, n2, n3 / n2;
-	--resto da divisão 
-	RAISE NOTICE '% %% % = %', n1, n2, n1 % n2;
-	-- Exponenciação
-	RAISE NOTICE '% ^ % = %', n1, n2, n1 ^ n2;
-	-- Raiz quadrada
-	RAISE NOTICE '|/ % = %', n1, |/n1;
-	--Raiz cubica
-	RAISE NOTICE '||?% = %', n1, ||/n1;
-	-- Valor absoluto - ignorar o sinal 
-	RAISE NOTICE '@% = % e @% = %', n1, @n1, n4, @n4;
+	--0 <= n <1 (intervalo real)
+	n1 := random();
+	RAISE NOTICE 'n1: %', n1;
+	-- 1 <= n1 < 10 (intervalo real)
+	n1 := 1 + random() * 9;
+	-- 1 <= n2 , 10 (::int faz type cast)floor arredonda para baixo
+	n2 := floor(random() * 9 + 1)::INT;
+	RAISE NOTICE 'n2: %', n2;
+	--gerar um valor inteiro entre 5 e 17
+	n2 := 5 + floor(
+		random() * 
+		(limite_sup - limite_inf + 1)
+	)::INT;
+	RAISE NOTICE '%', n2;
 END;
 $$
+
+
+
+
+
+
+
+
+-- DO 
+-- $$
+-- DECLARE 
+-- 	n1 INT := 5;
+-- 	n2 INT := 2;
+-- 	n3 NUMERIC (5, 2) := 5;
+-- 	n4 INT :=  -5;
+-- BEGIN
+-- 	-- divisão inteira 
+-- 	RAISE NOTICE '% / % = %', n1, n2, n1/n2;
+-- 	--divisão real 
+-- 	RAISE NOTICE '% / % = %', n3, n2, n3 / n2;
+-- 	--resto da divisão 
+-- 	RAISE NOTICE '% %% % = %', n1, n2, n1 % n2;
+-- 	-- Exponenciação
+-- 	RAISE NOTICE '% ^ % = %', n1, n2, n1 ^ n2;
+-- 	-- Raiz quadrada
+-- 	RAISE NOTICE '|/ % = %', n1, |/n1;
+-- 	--Raiz cubica
+-- 	RAISE NOTICE '||?% = %', n1, ||/n1;
+-- 	-- Valor absoluto - ignorar o sinal 
+-- 	RAISE NOTICE '@% = % e @% = %', n1, @n1, n4, @n4;
+-- END;
+-- $$
 
 
 
